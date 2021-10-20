@@ -1,3 +1,3 @@
-# Multi-account AWS with Terragrunt
+# Multi-account AWS with Terraform in 60 minutes
 
-See the blog post here for more.
+Find the blog post [here](https://henrycourse.com/blog/2021/10/19/aws-terraform-one-hour/)
