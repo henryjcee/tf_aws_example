@@ -1,12 +1,21 @@
-# Uncomment this after initial setup
-#terraform {
-#  backend "s3" {}
-#}
+# Comment for initial setup
+terraform {
+  backend "s3" {}
+}
 
 resource "aws_s3_bucket" "tf_state" {
-  bucket = "tf-state-<RANDOM_STRING>"
-  acl    = "private"
-  versioning {
-    enabled = true
+  bucket = "example-tfstate"
+
+  lifecycle {
+    prevent_destroy = true
   }
+}
+
+resource "aws_s3_bucket_public_access_block" "tf_state" {
+
+  bucket = aws_s3_bucket.tf_state.id
+
+  block_public_acls       = true
+  block_public_policy     = true
+  restrict_public_buckets = true
 }

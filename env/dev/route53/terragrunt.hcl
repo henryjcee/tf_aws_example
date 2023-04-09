@@ -1,7 +1,7 @@
 include {
-  path = find_in_parent_folders()
+  path = find_in_parent_folders("base.hcl")
 }
 
-terraform {
-  source = "../../../modules//route53"
+include "route53" {
+  path = "${get_terragrunt_dir()}/../../_common/route53.hcl"
 }
