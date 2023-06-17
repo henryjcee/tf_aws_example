@@ -18,7 +18,7 @@ output "zone_info" {
   }
 }
 
-// Generate NS records for any subdomains
+// Generate NS records for subdomains to allow subdomain DNS management in the subdomain account
 resource "aws_route53_record" "subdomain_ns" {
   name = var.subdomain_nameservers[count.index].subdomain
   type = "NS"

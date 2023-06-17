@@ -6,6 +6,7 @@ include "route53_zone" {
   path = "${get_terragrunt_dir()}/../../_common/route53_zone.hcl"
 }
 
+# Adding a dependency on the .dev zone to allow us to add an NS record for it
 dependency "dev_route53_zone" {
   config_path = "../../dev/route53_zone"
 }
