@@ -6,32 +6,17 @@ variable "env" {
   type = string
 }
 
-variable "subdomain_nameservers" {
-  type = list(object({subdomain=string, nameservers=set(string)}))
-  default = []
+variable "example_com_zone_id" {
+  type = string
 }
 
 locals {
-  example_domain_name = "${var.env == "prod" ? "" : "${var.env}."}example.com"
-}
-
-module "example" {
-  source         = "./zone"
-  domain         = local.example_domain_name
-  subdomain_nameservers = var.subdomain_nameservers
-}
-
-output "example_com_zone_info" {
-  value = {
-    subdomain = var.env == "prod" ? "" : var.env
-    zone_id = module.example.zone_id
-    nameservers = module.example.nameservers
-  }
+  example_com_domain = "${var.env == "prod" ? "" : "${var.env}."}example.com"
 }
 
 resource "aws_route53_record" "example_root" {
-  zone_id = module.example.zone_info.zone_id
-  name    = local.example_domain_name
+  zone_id = var.example_com_zone_id
+  name    = local.example_com_domain
   type    = "A"
-  records = ["<IP_ADDRESS_HERE>"]
+  records = ["<IP_ADDRESS>"]
 }
