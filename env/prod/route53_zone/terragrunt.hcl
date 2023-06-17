@@ -12,5 +12,5 @@ dependency "dev_route53_zone" {
 }
 
 inputs = {
-  example_com_subdomain_nameservers = [dependency.dev_route53_zone.outputs.example_com_zone_info]
+  example_com_subdomain_nameservers = [dependency.dev_route53_zone.outputs.nameservers]
 }
